@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- indoor world spawn pose -->
+    <arg name="x_pos1" default="1.0"/>
+    <arg name="y_pos1" default="0.0"/>
+    <arg name="z_pos1" default="0.0"/>
+
+    <arg name="x_pos2" default="-1.0"/>
+    <arg name="y_pos2" default="0.0"/>
+    <arg name="z_pos2" default="0.0"/>
+
+    <arg name="x_pos3" default="0.0"/>
+    <arg name="y_pos3" default="1.0"/>
+    <arg name="z_pos3" default="0.0"/>
+
+    <arg name="x_pos4" default="0.0"/>
+    <arg name="y_pos4" default="-1.0"/>
+    <arg name="z_pos4" default="0.0"/>
+
+    <arg name="model" default="$(find volta_description)/urdf/volta.xacro"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)"/>
+
+    <node name="spawn_robot1" pkg="gazebo_ros" type="spawn_model" args="
+        -urdf -param robot_description
+        -model robot1
+        -x $(arg x_pos1)
+        -y $(arg y_pos1)
+        -z $(arg z_pos1)
+    "/>
+
+    <!-- Spawn second instance of the robot -->
+    <node name="spawn_robot2" pkg="gazebo_ros" type="spawn_model" args="
+        -urdf -param robot_description
+        -model robot2
+        -x $(arg x_pos2)
+        -y $(arg y_pos2)
+        -z $(arg z_pos2)
+    "/>
+
+    <!-- Spawn third instance of the robot -->
+    <node name="spawn_robot3" pkg="gazebo_ros" type="spawn_model" args="
+        -urdf -param robot_description
+        -model robot3
+        -x $(arg x_pos3)
+        -y $(arg y_pos3)
+        -z $(arg z_pos3)
+    "/>
+
+    <!-- Spawn fourth instance of the robot -->
+    <node name="spawn_robot4" pkg="gazebo_ros" type="spawn_model" args="
+        -urdf -param robot_description
+        -model robot4
+        -x $(arg x_pos4)
+        -y $(arg y_pos4)
+        -z $(arg z_pos4)
+    "/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    <!-- Include control and localization launch files -->
+    <include file="$(find volta_control)/launch/control.launch" />
+    <include file="$(find volta_localization)/launch/localization.launch" />
+</launch>

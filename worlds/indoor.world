@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Specify the path to the empty world file -->
+    <arg name="world_file" default="$(find gazebo_ros)/worlds/empty.world"/>
+
+    <!-- Launch Gazebo with the empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_file)"/>
+    </include>
+</launch>
