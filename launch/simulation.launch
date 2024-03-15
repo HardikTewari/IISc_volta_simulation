@@ -59,9 +59,6 @@
         -z $(arg z_pos4)
     "/>
 
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-
     <!-- Include control and localization launch files -->
     <include file="$(find volta_control)/launch/control.launch" />
     <include file="$(find volta_localization)/launch/localization.launch" />
