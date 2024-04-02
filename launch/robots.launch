@@ -1,0 +1,25 @@
+<launch>
+
+<!--Finding the urdf file-->
+    <arg name="model" default="$(find volta_description)/urdf/volta.xacro"/>
+    <param name= "robot_description"
+        command= "$(find xacro)/xacro --inorder $(arg model)"/>
+
+    <!--Start Robot 1-->
+    <group ns="robot1">
+        <param name="tf_prefix" value="robot1_tf" />
+        <include file="$(find volta_simulation)/launch/one_robot.launch" >
+            <arg name="init_pose" value="-x 1 -y 0 -z 0" />
+            <arg name="robot_name" value="Robot1" />
+        </include>
+    </group>
+    <!--Staart Robot 2-->
+    <group ns="robot2">
+        <param name="tf_prefix" value="robot2_tf" />
+        <include file="$(find volta_simulation)/launch/one_robot.launch" >
+            <arg name="init_pose" value="-x -1 -y 0 -z 0" />
+            <arg name="robot_name" value="Robot2" />
+        </include>
+    </group>
+
+</launch>
