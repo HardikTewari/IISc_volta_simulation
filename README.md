@@ -12,12 +12,9 @@ https://github.com/botsync/volta
 ## Steps to launch volta on Gazebo
 * Launch the gazebo world with
 ```
-$ roslaunch IISc_volta_simulation gazebo.launch
+$ roslaunch IISc_volta_simulation main.launch
 ```
-* Spawn the robot on the gazebo world with
-```
-$roslaunch IISc_volta_simulation simulation.launch
-```
+
 * Start the simulation with a simple publish to cmd_vel
 ```
 $ rostopic pub /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y:0, z:0}, angular: {x:0, y:0, z:1}}'
